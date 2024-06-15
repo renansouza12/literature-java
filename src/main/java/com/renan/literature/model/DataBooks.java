@@ -17,5 +17,5 @@ public record DataBooks(
   @JsonAlias("death_year") String deathYear,  
   
   @JsonAlias("languages")  List<String> languages,
-  @JsonAlias("download_count") String downloands,
+  @JsonAlias("download_count") double downloads,
   @JsonProperty("results") List<DataBooks> results ) {}
