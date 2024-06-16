@@ -54,6 +54,8 @@ public class Principal {
                 case 2:
                     registeredBooks();
                     break;
+                case 3:
+                    registeredAuthors();
                 default:
                     break;
             }
@@ -61,6 +63,26 @@ public class Principal {
         } while (option != 0);
 
         sc.close();
+
+    }
+
+    private void registeredAuthors() {
+        List<BookDTO> authorsRegistered = bookService.getAuthorsRegistered();
+        System.out.println("working THIRD OPTION");
+        for(BookDTO author: authorsRegistered){
+            System.out.printf("""
+                ---------- Authors ----------
+
+                Name:  %s
+
+                Birth year: %s
+
+                Death year: %s
+            
+                            
+                    """,author.author(),author.birthYear(),author.deathYear());
+        }
+
 
     }
 
@@ -82,6 +104,7 @@ public class Principal {
     public void searchBookByTitle(String title) throws IOException, InterruptedException {
 
         String json = api.getApiResults(BASE_URL + title);
+        System.out.println(json);
         DataBooks data = converter.getData(json, DataBooks.class);
         List<DataBooks> books = data.results();
 
@@ -92,6 +115,19 @@ public class Principal {
                         .map(a -> a.name())
                         .collect(Collectors.joining(", "));
 
+
+                String birthYear = bookData.authors()
+                        .stream()
+                        .map(a -> a.birthYear())
+                        .collect(Collectors.joining(", "));
+
+                
+                        String deathYear = bookData.authors()
+                        .stream()
+                        .map(a -> a.deathYear())
+                        .collect(Collectors.joining(", "));
+
+
                 String languages = bookData.languages()
                         .stream()
                         .collect(Collectors.joining(", "));
@@ -101,6 +137,8 @@ public class Principal {
                 book.setAuthor(authors);
                 book.setLanguage(languages);
                 book.setDownloads(bookData.downloads());
+                book.setBirthYear(birthYear);
+                book.setDearthYear(deathYear);
 
                 bookService.saveBook(book);
                 

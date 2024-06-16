@@ -25,9 +25,13 @@ public class BookService {
         return convertData(bookRepository.findAll());
     }
 
+    public List<BookDTO> getAuthorsRegistered(){
+        return convertData(bookRepository.getRegisteredAuthors());
+    }
+
     public List<BookDTO> convertData(List<Book> book){
         return book.stream()
-                .map(b -> new BookDTO(b.getId(), b.getTitle(), b.getAuthor(), b.getLanguage(), b.getDownloads()))
+                .map(b -> new BookDTO(b.getId(), b.getTitle(), b.getAuthor(), b.getLanguage(), b.getDownloads(),b.getBirthYear(),b.getDearthYear()))
                 .collect(Collectors.toList());
     }
 }

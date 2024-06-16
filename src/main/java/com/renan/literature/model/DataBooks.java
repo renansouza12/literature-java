@@ -14,7 +14,7 @@ public record DataBooks(
   @JsonAlias("authors") List<DataBooks>  authors, 
   @JsonAlias("name") String name,  
   @JsonAlias("birth_year") String birthYear,  
-  @JsonAlias("death_year") String deathYear,  
+  @JsonAlias("death_year") String  deathYear,  
   
   @JsonAlias("languages")  List<String> languages,
   @JsonAlias("download_count") double downloads,

@@ -26,6 +26,12 @@ public class Book {
     @Column
     private double downloads;
 
+    @Column
+    private String birthYear;
+    
+    @Column
+    private String dearthYear;
+
     public Long getId() {
         return id;
     }
@@ -55,5 +61,17 @@ public class Book {
     }
     public void setDownloads(double downloads) {
         this.downloads = downloads;
+    }
+    public String getBirthYear() {
+        return birthYear;
+    }
+    public void setBirthYear(String birthYear) {
+        this.birthYear = birthYear;
+    }
+    public String getDearthYear() {
+        return dearthYear;
+    }
+    public void setDearthYear(String dearthYear) {
+        this.dearthYear = dearthYear;
     }
 }
