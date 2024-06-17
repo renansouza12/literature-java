@@ -18,7 +18,7 @@ This project implements a Java Spring Boot application that functions as a book 
 - Spring Boot
 - PostgreSQL (database)
 - Gutenberg API (external data source)
-- 
+  
 ## Prerequisites:
 
 - Java installed (version 11 or later recommended)
@@ -38,10 +38,17 @@ cd
 code .
 ```
 
-
 Configure your PostgreSQL database connection details in src/main/resources/application.properties. Update the following properties:
+```properties
 
 Properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/your-database-name
-spring.datasource.username=your-database-username
-spring.datasource.password=your-database-password
+spring.datasource.url=jdbc:postgresql://{DB_HOST}/books
+spring.datasource.username={DB_USERNAME}
+spring.datasource.password={DB_PASSWORD}
+spring.datasource.driver-class-name=org.postgresql.Driver
+hibernate.dialect=org.hibernate.dialect.HSQLDialect
+spring.jpa.hibernate.ddl-auto=update
+
+
+```
+
