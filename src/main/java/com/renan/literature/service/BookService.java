@@ -25,8 +25,12 @@ public class BookService {
         return convertData(bookRepository.findAll());
     }
 
-    public List<BookDTO> getAuthorsRegistered(){
-        return convertData(bookRepository.getRegisteredAuthors());
+    public List<Book> getAuthorsRegistered(){
+        return bookRepository.getRegisteredAuthors();
+    }
+
+    public List<Book> getBooksLang(String lang){
+        return bookRepository.booksLanguage(lang);
     }
 
     public List<BookDTO> convertData(List<Book> book){

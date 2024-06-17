@@ -10,6 +10,9 @@ import com.renan.literature.entity.Book;
 public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Query("SELECT b FROM Book b")
-    List<Book> getRegisteredAuthors();
+        List<Book> getRegisteredAuthors();
+
+    @Query("SELECT b FROM Book b WHERE b.Language = :language")
+    List<Book> booksLanguage(String language);
 
 }

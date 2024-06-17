@@ -56,34 +56,84 @@ public class Principal {
                     break;
                 case 3:
                     registeredAuthors();
+                    break;
+                case 4:
+                    ListBooksByLanguages();
+                break;
                 default:
                     break;
             }
 
         } while (option != 0);
 
-        sc.close();
+        
 
     }
 
+    private void ListBooksByLanguages() {
+        System.out.println("""
+                
+        -------- Insira um idioma para realizar a buscar ------
+
+        pt - Português
+        fr - Francês
+        en - Inglês
+        es - Espanhol
+
+
+        Sua escolhar:
+                """);
+
+        var languageSelected= sc.nextLine();
+       
+        List<Book> booksInLanguage = bookService.getBooksLang(languageSelected);
+
+        if (booksInLanguage.isEmpty()) {
+            System.out.println("Nenhum livro encontrado no idioma selecionado.");
+        } else {
+            for (Book book : booksInLanguage) {
+                System.out.printf("""
+                    ---------- Livros em %s ----------
+    
+                    Título: %s
+                    Autor: %s
+                    Idioma: %s
+                    Downloads: %s
+                    Ano de Nascimento: %s
+                    Ano de Falecimento: %s
+                    """,
+                    languageSelected, book.getTitle(), book.getAuthor(), book.getLanguage(),
+                    book.getDownloads(), book.getBirthYear(), book.getDearthYear());
+            }
+        }
+    
+    }
+
+    
+    public List<String> conveterBookLanguages( String language){
+        return bookService.getBooksLang(language)
+                            .stream()
+                            .map(Book::getTitle)
+                            .collect(Collectors.toList());
+
+    }
+
+
     private void registeredAuthors() {
-        List<BookDTO> authorsRegistered = bookService.getAuthorsRegistered();
-        System.out.println("working THIRD OPTION");
-        for(BookDTO author: authorsRegistered){
+        List<Book> authorsRegistered = bookService.getAuthorsRegistered();
+        for(Book author: authorsRegistered){
             System.out.printf("""
                 ---------- Authors ----------
 
-                Name:  %s
+                Nome:  %s
 
-                Birth year: %s
+                Data de nasciment: %s
 
-                Death year: %s
+                Data de Falecimento: %s
             
                             
-                    """,author.author(),author.birthYear(),author.deathYear());
+                    """,author.getAuthor(),author.getBirthYear(),author.getDearthYear());
         }
-
-
     }
 
     private void registeredBooks() {
@@ -104,7 +154,6 @@ public class Principal {
     public void searchBookByTitle(String title) throws IOException, InterruptedException {
 
         String json = api.getApiResults(BASE_URL + title);
-        System.out.println(json);
         DataBooks data = converter.getData(json, DataBooks.class);
         List<DataBooks> books = data.results();
 
@@ -157,5 +206,6 @@ public class Principal {
             System.out.println("\n Livro não encontrado, tente novamente\n");
         }
     }
-
+    
 }
+
