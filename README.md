@@ -1,4 +1,4 @@
-# Project Name: Book Search API
+# Literature 
 
 ## Description:
 
@@ -6,11 +6,9 @@ This project implements a Java Spring Boot application that functions as a book 
 
 ### Features:
 
-- Search for books by title using the Gutenberg API.
-- Save retrieved book details to a PostgreSQL database.
 - List all saved books.
 - Filter saved books by language.
-- Filter saved books by author (implementation details not provided in the given code).
+- Filter saved books by author .
   
 ## Technologies:
 
@@ -30,10 +28,10 @@ This project implements a Java Spring Boot application that functions as a book 
 
 Clone this repository:
 
-``` Bash 
-git clone https://github.com/your-username/book-search-api.git
+``` markdown 
+git clone https://github.com/renansouza12/literature-java.git
 
-cd
+cd literature-java
 
 code .
 ```
